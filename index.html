@@ -1,348 +1,188 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PORTFOLIO | Motion & Graphic Design</title>
+  <title>PORTFOLIO</title>
+  <!-- 원래 포트폴리오의 진짜 CSS 연결 -->
+  <link rel="stylesheet" href="/0s1bma7s61jwi.css" />
   <style>
-    :root {
-      --bg: #0d0e11;
-      --card-bg: #16181d;
-      --card-border: #262930;
-      --text-main: #f3f4f6;
-      --text-sub: #9ca3af;
-      --accent: #22c55e;
-      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* 배경 및 기본 정돈 */
     body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      font-family: var(--font);
-      line-height: 1.6;
-      padding: 40px 20px 80px;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    /* Header */
-    header {
-      margin-bottom: 50px;
-      text-align: center;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 10px;
+      background-color: #0b0c0e;
       color: #fff;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
-    header p {
-      color: var(--text-sub);
-      font-size: 1.1rem;
-    }
-
-    /* Project Grid */
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 28px;
-    }
-
-    /* Project Card */
-    .project-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-    }
-    .project-card:hover {
-      transform: translateY(-5px);
-      border-color: #3b404d;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-    }
-
-    .card-thumb {
-      width: 100%;
-      height: 210px;
-      background: #000;
-      overflow: hidden;
-      position: relative;
-    }
-    .card-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-    .project-card:hover .card-thumb img {
-      transform: scale(1.04);
-    }
-
-    .card-body {
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-    .card-meta {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--accent);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .card-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 8px;
-    }
-    .card-desc {
-      font-size: 0.92rem;
-      color: var(--text-sub);
-      margin-bottom: 16px;
-      flex: 1;
-    }
-    .card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .tag {
-      font-size: 0.75rem;
-      background: #232730;
-      color: #d1d5db;
-      padding: 3px 8px;
-      border-radius: 4px;
-    }
-
-    /* Modal (Dialog) */
+    
+    /* 모달 기본 스타일 보완 */
     dialog.project-dialog {
       margin: auto;
-      border: 1px solid var(--card-border);
-      background: #14161a;
+      border: 1px solid #333;
+      background: #16181d;
       border-radius: 16px;
-      max-width: 760px;
-      width: 92vw;
-      color: var(--text-main);
+      max-width: 800px;
+      width: 90vw;
+      color: #fff;
       padding: 0;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
       overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.85);
     }
     dialog::backdrop {
       background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-    }
-
-    .dialog-header {
-      padding: 20px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--card-border);
-    }
-    .dialog-title { font-size: 1.25rem; font-weight: 700; }
-    .dialog-close {
-      background: #262930;
-      border: none;
-      color: #9ca3af;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s, color 0.2s;
-    }
-    .dialog-close:hover { background: #374151; color: #fff; }
-
-    .dialog-media {
-      width: 100%;
-      background: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      max-height: 430px;
-    }
-    .dialog-media video {
-      width: 100%;
-      max-height: 430px;
-      display: block;
-      outline: none;
-    }
-
-    .dialog-content {
-      padding: 24px;
-    }
-    .dialog-meta {
-      font-size: 0.85rem;
-      color: var(--accent);
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-    .dialog-desc {
-      font-size: 1rem;
-      color: #d1d5db;
-      line-height: 1.7;
+      backdrop-filter: blur(5px);
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <h1>PORTFOLIO</h1>
-      <p>Motion Graphics & Visual Design Works</p>
-    </header>
+  <!-- 상단 헤더 -->
+  <header class="site-header" style="padding: 40px 20px 20px; text-align: center;">
+    <h1 style="font-size: 2.2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px;">PORTFOLIO</h1>
+    <p style="color: #888; font-size: 1rem;">Motion Graphics & Visual Design</p>
+  </header>
 
-    <div class="project-grid" id="projectGrid">
-      <!-- 프로젝트 카드 1 -->
-      <article class="project-card" 
-               data-title="신한카드 x 먼작귀" 
-               data-meta="01 / Promotion Motion 2026"
-               data-video="/hero.mp4" 
-               data-poster="/shinhan-v4-frame-01.png"
-               data-desc="신한카드와 먼작귀의 콜라보레이션 카드 런칭 프로모션 영상입니다. 캐릭터 고유의 감성을 살리면서 주요 혜택이 직관적으로 전달되도록 2D/3D 키프레임과 타이포 모션을 결합했습니다.">
-        <div class="card-thumb">
-          <img src="/shinhan-v4-frame-01.png" alt="신한카드 먼작귀" />
-        </div>
-        <div class="card-body">
-          <div class="card-meta">01 / PROMOTION</div>
-          <h2 class="card-title">신한카드 x 먼작귀</h2>
-          <p class="card-desc">캐릭터 비주얼을 화면 가득 채운 카드 포커스 프로모션</p>
-          <div class="card-tags">
-            <span class="tag">After Effects</span>
-            <span class="tag">Illustrator</span>
-            <span class="tag">Motion</span>
-          </div>
-        </div>
-      </article>
+  <main id="top" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+    <section class="projects-section wrap" id="projects">
+      <div class="project-grid">
 
-      <!-- 프로젝트 카드 2 -->
-      <article class="project-card" 
-               data-title="NEXUS STUDIO" 
-               data-meta="02 / Brand Identity 2026"
-               data-video="/escape.mp4" 
-               data-poster="/nexus-grid.webp"
-               data-desc="타이포그래피에 입체적인 리듬감과 공간감을 부여한 브랜드 필름 프로젝트입니다. 그리드 시스템 기반의 정밀한 레이아웃 전개와 스무스한 카메라 트래킹 전환을 연출했습니다.">
-        <div class="card-thumb">
-          <img src="/nexus-grid.webp" alt="NEXUS STUDIO" />
-        </div>
-        <div class="card-body">
-          <div class="card-meta">02 / BRAND IDENTITY</div>
-          <h2 class="card-title">NEXUS STUDIO</h2>
-          <p class="card-desc">타이포그래피에 리듬과 공간을 더한 키네틱 모션</p>
-          <div class="card-tags">
-            <span class="tag">Typography</span>
-            <span class="tag">3D Camera</span>
-            <span class="tag">Styleframe</span>
-          </div>
-        </div>
-      </article>
+        <!-- 카드 1: 신한카드 -->
+        <article class="project-card">
+          <button class="project-button" type="button"
+                  data-title="신한카드 x 먼작귀"
+                  data-meta="01 / Promotion 2026"
+                  data-video="/hero.mp4"
+                  data-poster="/shinhan-v4-frame-01.png"
+                  data-desc="신한카드와 먼작귀의 콜라보레이션 프로모션 영상입니다. 캐릭터의 리듬감 있는 모션과 핵심 혜택을 시각적으로 강조했습니다.">
+            <div class="project-image">
+              <img src="/shinhan-v4-frame-01.png" alt="신한카드 먼작귀" loading="lazy" />
+              <span class="card-open" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </span>
+            </div>
+            <div class="card-meta mono">01 / Promotion</div>
+            <div class="card-title">신한카드 x 먼작귀</div>
+            <p class="card-description">귀여움과 카드 혜택을 끊김 없는 15초 흐름으로 전달하다.</p>
+            <div class="tool-tags">
+              <span class="tag">After Effects</span>
+              <span class="tag">Illustrator</span>
+            </div>
+          </button>
+        </article>
 
-      <!-- 프로젝트 카드 3 -->
-      <article class="project-card" 
-               data-title="ESCAPE" 
-               data-meta="03 / Cinematic Trailer"
-               data-video="/escape.mp4" 
-               data-poster="/escape-poster.webp"
-               data-desc="속도감 넘치는 전환 효과와 공간감 있는 라이팅으로 구성한 시네마틱 트레일러 비주얼입니다. 사운드 싱크에 최적화된 긴장감 있는 모션 템포를 설계했습니다.">
-        <div class="card-thumb">
-          <img src="/escape-poster.webp" alt="ESCAPE" />
-        </div>
-        <div class="card-body">
-          <div class="card-meta">03 / CINEMATIC</div>
-          <h2 class="card-title">ESCAPE</h2>
-          <p class="card-desc">긴장감 넘치는 속도감과 공간감의 시네마틱 시퀀스</p>
-          <div class="card-tags">
-            <span class="tag">Cinematic</span>
-            <span class="tag">Sound Design</span>
-            <span class="tag">Visual FX</span>
-          </div>
-        </div>
-      </article>
+        <!-- 카드 2: NEXUS STUDIO -->
+        <article class="project-card">
+          <button class="project-button" type="button"
+                  data-title="NEXUS STUDIO"
+                  data-meta="02 / Brand Identity 2026"
+                  data-video="/escape.mp4"
+                  data-poster="/nexus-grid.webp"
+                  data-desc="타이포그래피에 입체적인 공간감과 모션감을 부여한 브랜드 디자인 필름 프로젝트입니다.">
+            <div class="project-image">
+              <img src="/nexus-grid.webp" alt="NEXUS STUDIO" loading="lazy" />
+              <span class="card-open" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </span>
+            </div>
+            <div class="card-meta mono">02 / Identity</div>
+            <div class="card-title">NEXUS STUDIO</div>
+            <p class="card-description">타이포그래피에 리듬과 공간을 더하다.</p>
+            <div class="tool-tags">
+              <span class="tag">3D Motion</span>
+              <span class="tag">Typography</span>
+            </div>
+          </button>
+        </article>
+
+        <!-- 카드 3: ESCAPE -->
+        <article class="project-card">
+          <button class="project-button" type="button"
+                  data-title="ESCAPE"
+                  data-meta="03 / Cinematic Trailer"
+                  data-video="/escape.mp4"
+                  data-poster="/escape-poster.webp"
+                  data-desc="스피드감과 긴장감을 극대화한 시네마틱 트레일러 모션그래픽 영상입니다.">
+            <div class="project-image">
+              <img src="/escape-poster.webp" alt="ESCAPE" loading="lazy" />
+              <span class="card-open" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </span>
+            </div>
+            <div class="card-meta mono">03 / Cinematic</div>
+            <div class="card-title">ESCAPE</div>
+            <p class="card-description">몰입감 있는 속도감과 공간 구성의 시네마틱 시퀀스</p>
+            <div class="tool-tags">
+              <span class="tag">Cinema 4D</span>
+              <span class="tag">After Effects</span>
+            </div>
+          </button>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- 상세 팝업 다이얼로그 -->
+  <dialog class="project-dialog" id="modalDialog">
+    <div style="padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #262930;">
+      <h2 id="mTitle" style="margin: 0; font-size: 1.3rem; font-weight: 700;"></h2>
+      <button id="mCloseBtn" style="background: #2a2e38; border: none; color: #fff; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 16px;">✕</button>
     </div>
-  </div>
-
-  <!-- 비디오 팝업 모달 -->
-  <dialog class="project-dialog" id="projectDialog">
-    <div class="dialog-header">
-      <div class="dialog-title" id="dTitle">프로젝트 타이틀</div>
-      <button class="dialog-close" id="dCloseBtn" aria-label="닫기">✕</button>
+    <div style="background: #000; width: 100%; max-height: 440px; display: flex; justify-content: center; align-items: center;">
+      <video id="mVideo" controls playsinline style="width: 100%; max-height: 440px; display: block; outline: none;"></video>
     </div>
-    <div class="dialog-media">
-      <video id="dVideo" controls playsinline></video>
-    </div>
-    <div class="dialog-content">
-      <div class="dialog-meta" id="dMeta">Category</div>
-      <p class="dialog-desc" id="dDesc">상세 설명</p>
+    <div style="padding: 24px;">
+      <div id="mMeta" style="font-size: 0.85rem; color: #4ade80; margin-bottom: 8px; font-weight: 600;"></div>
+      <p id="mDesc" style="font-size: 0.95rem; color: #d1d5db; line-height: 1.6; margin: 0;"></p>
     </div>
   </dialog>
 
-  <!-- 100% 동작하는 순수 JS 스크립트 -->
+  <!-- 안정적인 순수 자바스크립트 -->
   <script>
-    const dialog = document.getElementById("projectDialog");
-    const dTitle = document.getElementById("dTitle");
-    const dMeta = document.getElementById("dMeta");
-    const dDesc = document.getElementById("dDesc");
-    const dVideo = document.getElementById("dVideo");
-    const dCloseBtn = document.getElementById("dCloseBtn");
+    const dialog = document.getElementById("modalDialog");
+    const mTitle = document.getElementById("mTitle");
+    const mMeta = document.getElementById("mMeta");
+    const mDesc = document.getElementById("mDesc");
+    const mVideo = document.getElementById("mVideo");
+    const mCloseBtn = document.getElementById("mCloseBtn");
 
-    // 카드 클릭 시 모달 열기
-    document.querySelectorAll(".project-card").forEach((card) => {
-      card.addEventListener("click", () => {
-        const title = card.getAttribute("data-title");
-        const meta = card.getAttribute("data-meta");
-        const desc = card.getAttribute("data-desc");
-        const video = card.getAttribute("data-video");
-        const poster = card.getAttribute("data-poster");
+    document.querySelectorAll(".project-button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        mTitle.textContent = btn.getAttribute("data-title");
+        mMeta.textContent = btn.getAttribute("data-meta");
+        mDesc.textContent = btn.getAttribute("data-desc");
 
-        dTitle.textContent = title;
-        dMeta.textContent = meta;
-        dDesc.textContent = desc;
+        mVideo.src = btn.getAttribute("data-video");
+        mVideo.poster = btn.getAttribute("data-poster") || "";
 
-        dVideo.src = video;
-        dVideo.poster = poster || "";
-        
         dialog.showModal();
-        dVideo.play().catch(() => {}); // 자동재생 실패 시 에러 방지
+        mVideo.play().catch(() => {});
       });
     });
 
-    // 닫기 동작
-    function closeModal() {
-      dVideo.pause();
-      dVideo.currentTime = 0;
-      dVideo.src = ""; // 메모리 해제
+    function closeDialog() {
+      mVideo.pause();
+      mVideo.currentTime = 0;
+      mVideo.src = "";
       dialog.close();
     }
 
-    dCloseBtn.addEventListener("click", closeModal);
+    mCloseBtn.addEventListener("click", closeDialog);
 
-    // 모달 바깥 어두운 배경 클릭 시 닫기
     dialog.addEventListener("click", (e) => {
-      if (e.target === dialog) {
-        closeModal();
-      }
+      if (e.target === dialog) closeDialog();
     });
 
-    // ESC 키 입력 시 닫기
     dialog.addEventListener("cancel", (e) => {
       e.preventDefault();
-      closeModal();
+      closeDialog();
     });
   </script>
 </body>
